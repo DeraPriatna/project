@@ -33,16 +33,6 @@
                             @enderror
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-3">Hak Akses</label>
-                        <div class="col-lg-9">
-                            <select name="hak_akses" class="form-control">
-                                <option value="Admin" @if($item->hak_akses == 'Admin') selected @endif>Admin</option>
-                                <option value="Super Admin" @if($item->hak_akses == 'Super Admin') selected @endif>Super Admin</option>
-                            </select>
-                        </div>
-                    </div>
                 </fieldset>
 
                 <div class="text-right">

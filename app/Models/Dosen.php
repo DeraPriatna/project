@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Forum;
 
 class Dosen extends Authenticatable
 {
@@ -37,4 +38,14 @@ class Dosen extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function forum()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

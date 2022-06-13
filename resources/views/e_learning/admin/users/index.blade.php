@@ -25,7 +25,6 @@
                     <th class="text-center">No</th>
                     <th>Nama User</th>
                     <th>Email</th>
-                    <th>Hak Akses</th>
                     <th class="text-center">Aksi</th>
                     <th></th>
                 </tr>
@@ -37,7 +36,6 @@
                     <td class="text-center">{{$no++}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->email}}</td>
-                    <td>{{$item->hak_akses}}</td>
                     <td class="text-center">
                         <div class="list-icons">
                             <div class="dropdown">

@@ -31,7 +31,7 @@
                 <div class="sidebar-resize-hide flex-1 ml-3">
                     <div class="font-weight-semibold">{{ Auth::guard('web')->user()->name }}</div>
                     <div class="font-size-sm line-height-sm text-muted">
-                    {{ Auth::guard('web')->user()->hak_akses }}
+                    Admin
                     </div>
                 </div>
             </div>
@@ -53,16 +53,14 @@
                         </span>
                     </a>
                 </li>
-                @if(Auth::guard('web')->user()->hak_akses == 'Super Admin')
                 <li class="nav-item">
                     <a href="{{ route('admin.user') }}" class="nav-link">
                         <i class="icon-users2"></i>
                         <span>
-                            Users
+                            User
                         </span>
                     </a>
                 </li>
-                @endif
                 <li class="nav-item">
                     <a href="{{ route('admin.mahasiswa') }}" class="nav-link">
                         <i class="icon-vcard"></i>

@@ -11,7 +11,42 @@
     <div class="d-flex w-100 w-xl-auto overflow-auto overflow-xl-visible scrollbar-hidden border-top border-top-light-100 border-top-xl-0 order-1 order-xl-0">
         <ul class="navbar-nav flex-row text-nowrap mx-auto">
             <li class="nav-item">
-                <a href="index.html" class="navbar-nav-link active">
+                <a href="/dosen/{{$kelas->id}}/forum" class="navbar-nav-link active">
+                    <i class="icon-collaboration mr-2"></i>
+                    Forum
+                </a>
+            </li>
+      
+            <li class="nav-item">
+                <a href="/dosen/{{$kelas->id}}/absensi" class="navbar-nav-link">
+                    <i class="icon-list-ordered mr-2"></i>
+                    Absensi
+                </a>
+            </li>
+        
+            <li class="nav-item">
+                <a href="/dosen/{{$kelas->id}}/materi" class="navbar-nav-link">
+                    <i class="icon-stack-text mr-2"></i>
+                    Materi
+                </a>
+            </li>
+        
+            <li class="nav-item">
+                <a href="/dosen/{{$kelas->id}}/tugas" class="navbar-nav-link">
+                    <i class="icon-clipboard3 mr-2"></i>
+                    Tugas
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/dosen/{{$kelas->id}}/tugas" class="navbar-nav-link">
+                    <i class="icon-clippy mr-2"></i>
+                    Nilai
+                </a>
+            </li>
+        
+            <li class="nav-item">
+                <a href="{{route('dosen.home')}}" class="navbar-nav-link">
                     <i class="icon-home4 mr-2"></i>
                     Kelas
                 </a>

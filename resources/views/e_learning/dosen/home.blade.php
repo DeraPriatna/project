@@ -63,19 +63,6 @@
 		</div>
 	</div>
 	<!-- /main navbar -->
-
-	<!-- Page header -->
-	<div class="page-header">
-		<div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
-			<div class="d-flex">
-				<div class="breadcrumb">
-					<a href="" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-					<span class="breadcrumb-item active">Kelas</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /page header -->
 		
 
 	<!-- Page content -->
@@ -86,23 +73,66 @@
 
 			<!-- Inner content -->
 			<div class="content-inner">
-                
+
 				<!-- Page header -->
-                <div class="row" style="padding-top: 6px;">
-                    <div class="content container">
-                        <div class="alert bg-primary text-white alert-styled-left alert-arrow-left alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
-                            <span class="font-weight-semibold">Selamat Datang di <i>E-Learning</i> STMIK Dharma Negara Bandung.</span>
-                        </div>
-                    </div>
-                </div>
+				<div class="page-header">
+					<div class="page-header-content container header-elements-md-inline">
+						<div class="d-flex">
+							<div class="page-title">
+								<h4 class="font-weight-semibold"><i>E-Learning</i></h4>
+								<div class="text-muted">STMIK Dharma Negara</div>
+							</div>
+							
+						</div>
+
+						<div class="header-elements d-none py-0 mb-3 mb-md-0">
+						
+						</div>
+					</div>
+				</div>
 				<!-- /page header -->
 
 
 				<!-- Content area -->
 				<div class="content container pt-0">
-
+					
 					<!-- Blocks with chart -->
+					<div class="row">
+						
+						@foreach($items as $item)
+						<div class="col-lg-4">
+
+							<!-- Current server load -->
+							<div class="card bg-pink text-white" style="background-image: url(../../../../global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
+								<div class="card-body">
+									<div class="d-flex">
+										<h5 class="font-weight-semibold mb-0"><a href="/dosen/{{$item->id}}/forum" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
+									</div>
+
+									<div>
+										<div class="media">
+											<div class="mr-3">
+												<i class="icon-laptop text-white icon-2x mt-2"></i>
+											</div>
+											<div class="media-body">
+												<h4 class="font-weight-bold mb-0">Semester {{$item->matkul->semester}} <small class="text-white font-size-sm ml-2">{{$item->matkul->sks}} SKS</small></h4>
+												Waktu : {{$item->waktu}} <br>
+												Tahun Akademik {{$item->thn_akademik}}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer text-center">
+									<span><i>Teknik Informatika</i></span>
+								</div>
+							</div>
+							<!-- /current server load -->
+
+						</div>
+						@endforeach
+					
+					</div>
+
 					<div class="row">
 
                         @foreach($items as $item)
@@ -111,7 +141,7 @@
 								<div class="card-body bg-teal text-white text-center card-img-top" style="background-image: url(../../../../global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
                                     <i class="icon-book icon-2x text-white border-white border-3 rounded-pill p-3 mb-3 mt-1"></i>
 
-									<h5 class="font-weight-semibold mb-0"><a href="/dosen/kelas/{{$item->id}}" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
+									<h5 class="font-weight-semibold mb-0"><a href="/dosen/{{$item->id}}/forum" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
 									<span class="d-block">Teknik Informatika</span>
 
 								</div>

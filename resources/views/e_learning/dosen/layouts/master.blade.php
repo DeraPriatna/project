@@ -9,7 +9,7 @@
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 	<link href="{{asset('global_assets/css/icons/icomoon/styles.min.css')}}" rel="stylesheet" type="text/css">
-	<link href="{{asset('assets_6/css/all.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets_5/css/all.min.css')}}" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
@@ -21,7 +21,7 @@
 	<script src="{{asset('global_assets/js/plugins/visualization/echarts/echarts.min.js')}}"></script>
 	<script src="{{asset('global_assets/js/plugins/maps/echarts/world.js')}}"></script>
 
-	<script src="{{asset('assets_6/js/app.js')}}"></script>
+	<script src="{{asset('assets_5/js/app.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/area_gradient.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/map_europe_effect.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/progress_sortable.js')}}"></script>
@@ -44,44 +44,36 @@
 		<!-- Main content -->
 		<div class="content-wrapper">
 
-			<!-- Inner content -->
-			<div class="content-inner">
-				
+			<!-- Content area -->
+			<div class="content">	
 
-				<!-- Content area -->
-				<div class="content container pt-0">
-
-                    @yield('content')
-
-				</div>
-				<!-- /content area -->
-
-
-				<!-- Footer -->
-				<div class="navbar navbar-expand-lg navbar-light">
-					<div class="text-center d-lg-none w-100">
-						<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
-							<i class="icon-unfold mr-2"></i>
-							Footer
-						</button>
-					</div>
-
-					<div class="navbar-collapse collapse" id="navbar-footer">
-						<span class="navbar-text">
-						&copy; 2022. <a><i>E-Learning</i></a> STMIK Dharma Negara Bandung.
-						</span>
-					</div>
-				</div>
-				<!-- /footer -->
+                @yield('content')
 
 			</div>
-			<!-- /inner content -->
+			<!-- /content area -->
 
 		</div>
 		<!-- /main content -->
 
 	</div>
 	<!-- /page content -->
+
+	<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+			&copy; 2022. <a><i>E-Learning</i></a> STMIK Dharma Negara Bandung.
+			</span>
+		</div>
+	</div>
+	<!-- /footer -->
 
 </body>
 </html>

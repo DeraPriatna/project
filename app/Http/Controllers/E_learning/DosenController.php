@@ -124,12 +124,6 @@ class DosenController extends Controller
         return view('e_learning.dosen.home',compact('items'));
     }
 
-    public function kelas($id)
-    {
-        $items = Kelas::all();
-        return view('e_learning.dosen.kelas.index',compact('items'));
-    }
-
     public function logout()
     {
         Auth::guard('dosen')->logout();

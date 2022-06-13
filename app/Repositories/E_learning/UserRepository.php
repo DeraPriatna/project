@@ -28,7 +28,6 @@ class UserRepository extends AppRepository
             'name' => ucwords($request->input('name')),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'hak_akses' => $request->input('hak_akses'),
         ];
     }
 }
