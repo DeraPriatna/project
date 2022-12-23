@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\E_learning\MatkulRepository;
 use Exception;
+use App\Models\Matkul;
 
 class MatkulController extends Controller
 {
@@ -18,7 +19,7 @@ class MatkulController extends Controller
   
     public function index(Request $request)
     {
-        $items = $this->repository->paginate($request);
+        $items = Matkul::select('*')->orderBy('kode')->get();
         return view('e_learning.admin.matkul.index',compact('items'));
     }
     

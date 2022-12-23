@@ -14,7 +14,7 @@ class Kelas extends Model
 
     protected $table = 'kelas';
 
-    protected $fillable = ['matkul_id','dosen_id','waktu','thn_akademik'];
+    protected $fillable = ['matkul_id','dosen_id','hari','waktu','thn_akademik','status'];
 
     public function matkul()
     {

@@ -94,11 +94,11 @@ var DatatableResponsive = function() {
                 },
                 { 
                     width: "100px",
-                    targets: [5]
+                    targets: [4]
                 },
                 { 
                     orderable: false,
-                    targets: [5]
+                    targets: [4]
                 }
             ]
         });

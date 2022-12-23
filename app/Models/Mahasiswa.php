@@ -26,6 +26,7 @@ class Mahasiswa extends Authenticatable
         'jk',
         'email',
         'password',
+        'status',
     ];
 
     /**

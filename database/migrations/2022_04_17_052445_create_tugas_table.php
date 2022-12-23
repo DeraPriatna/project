@@ -18,7 +18,9 @@ class CreateTugasTable extends Migration
             $table->string('judul',50);
             $table->text('petunjuk')->nullable();
             $table->string('file');
+            $table->date('tenggat')->nullable();
             $table->integer('kelas_id');
+            $table->string('status',1);
             $table->timestamps();
         });
     }

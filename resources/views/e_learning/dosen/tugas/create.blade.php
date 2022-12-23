@@ -49,6 +49,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group form-group-floating row">
+                        <i class="icon-calendar52 icon-m pt-2 col-lg-2"></i>
+                        <div class="col-lg-10">
+                            <div class="form-group-feedback form-group-feedback-right">
+                                <input type="date" name="tenggat" class="form-control form-control-outline" value="{{old('tenggat')}}">
+                                <label class="label-floating">Tenggat (opsional)</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="text-right">
                         <button type="submit" class="btn btn-secondary">Tugaskan <i class="icon-clipboard5 ml-2"></i></button>
                     </div>

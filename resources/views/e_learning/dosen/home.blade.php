@@ -38,8 +38,8 @@
 		<div class="d-flex flex-1 pl-3">
 			<div class="navbar-brand wmin-0 mr-1">
 				<a href="index.html" class="d-inline-block">
-					<img src="{{asset('global_assets/images/logo_light.png')}}" class="d-none d-sm-block" alt="">
-					<img src="{{asset('global_assets/images/logo_icon_light.png')}}" class="d-sm-none" alt="">
+					<img src="{{asset('global_assets/images/e_learning.png')}}" class="d-none d-sm-block" alt="">
+					<img src="{{asset('global_assets/images/e_learning2.png')}}" class="d-sm-none" alt="">
 				</a>
 			</div>
 		</div>
@@ -48,15 +48,14 @@
 			<ul class="navbar-nav flex-row">
 		
 				<li class="nav-item nav-item-dropdown-xl dropdown dropdown-user h-100">
-					<a href="#" class="navbar-nav-link navbar-nav-link-toggler d-flex align-items-center h-100 dropdown-toggle" data-toggle="dropdown">
-						<img src="{{asset('global_assets/images/placeholders/placeholder.jpg')}}" class="rounded-circle mr-xl-2" height="38" alt="">
+					<a href="" class="navbar-nav-link navbar-nav-link-toggler d-flex align-items-center h-100 dropdown-toggle" data-toggle="dropdown">
 						<span class="d-none d-xl-block">{{Auth::guard('dosen')->user()->nm_dsn}}</span>
 					</a>
 		
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+						<a href="/dosen/password/edit" class="dropdown-item"><i class="icon-lock2"></i> Edit Password</a>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+						<a href="{{ route('dosen.logout') }}" class="dropdown-item"><i class="icon-exit2"></i> Sign out</a>	
 					</div>
 				</li>
 			</ul>
@@ -103,10 +102,10 @@
 						<div class="col-lg-4">
 
 							<!-- Current server load -->
-							<div class="card bg-pink text-white" style="background-image: url(../../../../global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
+							<div class="card bg-primary text-white" style="background-image: url(../../../../global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
 								<div class="card-body">
 									<div class="d-flex">
-										<h5 class="font-weight-semibold mb-0"><a href="/dosen/{{$item->id}}/forum" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
+										<h5 class="font-weight-semibold mb-0"><a href="/dosen/f/{{$item->id}}/forum" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
 									</div>
 
 									<div>
@@ -116,7 +115,7 @@
 											</div>
 											<div class="media-body">
 												<h4 class="font-weight-bold mb-0">Semester {{$item->matkul->semester}} <small class="text-white font-size-sm ml-2">{{$item->matkul->sks}} SKS</small></h4>
-												Waktu : {{$item->waktu}} <br>
+												Hari/Waktu : {{$item->hari.', '.$item->waktu}} <br>
 												Tahun Akademik {{$item->thn_akademik}}
 											</div>
 										</div>
@@ -131,46 +130,6 @@
 						</div>
 						@endforeach
 					
-					</div>
-
-					<div class="row">
-
-                        @foreach($items as $item)
-                        <div class="col-lg-4">
-                            <div class="card">
-								<div class="card-body bg-teal text-white text-center card-img-top" style="background-image: url(../../../../global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
-                                    <i class="icon-book icon-2x text-white border-white border-3 rounded-pill p-3 mb-3 mt-1"></i>
-
-									<h5 class="font-weight-semibold mb-0"><a href="/dosen/{{$item->id}}/forum" style="color: #fff">{{$item->matkul->matkul}}</a></h5>
-									<span class="d-block">Teknik Informatika</span>
-
-								</div>
-
-								<div class="card-body border-top-0">
-									<div class="d-sm-flex flex-sm-wrap mb-2">
-										<div class="font-weight-semibold">Semester</div>
-										<div class="ml-sm-auto mt-2 mt-sm-0">{{$item->matkul->semester}}</div>
-									</div>
-
-									<div class="d-sm-flex flex-sm-wrap mb-2">
-										<div class="font-weight-semibold">SKS</div>
-										<div class="ml-sm-auto mt-2 mt-sm-0">{{$item->matkul->sks}}</div>
-									</div>
-
-									<div class="d-sm-flex flex-sm-wrap mb-2">
-										<div class="font-weight-semibold">Waktu</div>
-										<div class="ml-sm-auto mt-2 mt-sm-0">{{$item->waktu}}</a></div>
-									</div>
-
-									<div class="d-sm-flex flex-sm-wrap">
-										<div class="font-weight-semibold">Tahun Akademik</div>
-										<div class="ml-sm-auto mt-2 mt-sm-0">{{$item->thn_akademik}}</a></div>
-									</div>
-								</div>
-							</div>
-                        </div>
-                        @endforeach
-
 					</div>
 					<!-- /blocks with chart -->
 

@@ -27,6 +27,7 @@ class KelasRepository extends AppRepository
         return [
             'matkul_id' => $request->input('matkul_id'),
             'dosen_id' => $request->input('dosen_id'),
+            'hari' => $request->input('hari'),
             'waktu' => $request->input('waktu'),
             'thn_akademik' => $request->input('thn_akademik'),
         ];

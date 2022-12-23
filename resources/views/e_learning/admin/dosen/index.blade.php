@@ -28,8 +28,8 @@
                     <th>Jenis Kelamin</th>
                     <th>Email</th>
                     <th>Pendidikan</th>
-                    <th class="text-center">Aksi</th>
                     <th>Jabatan Fungsional</th>
+                    <th class="text-center">Aksi</th>
                     <th></th>
                 </tr>
             </thead>
@@ -43,6 +43,7 @@
                     <td>{{$item->jk}}</td>
                     <td>{{$item->email}}</td>
                     <td>{{$item->pend}}</td>
+                    <td>{{$item->jab_fungs}}</td>
                     <td class="text-center">
                         <div class="list-icons">
                             <div class="dropdown">
@@ -57,7 +58,6 @@
                             </div>
                         </div>
                     </td>
-                    <td>{{$item->jab_fungs}}</td>
                     <td></td>
                 </tr>
                 @endforeach

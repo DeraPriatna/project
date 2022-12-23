@@ -33,9 +33,9 @@
                         </div>
                     </div>
                     <div class="form-group row" style="margin-top: -25px">
-                        <label class="col-lg-3 col-form-label">Waktu</label>
+                        <label class="col-lg-3 col-form-label">Hari / Waktu</label>
                         <div class="col-lg-9">
-                            <div class="form-control-plaintext">{{$item->waktu}}</div>
+                            <div class="form-control-plaintext">{{$item->hari.' ('.$item->waktu}})</div>
                         </div>
                     </div>
                     <div class="form-group row" style="margin-top: -25px">

@@ -17,7 +17,7 @@
                         <i class="icon-pen6 icon-m pt-2 col-lg-2"></i>
                         <div class="col-lg-10">
                             <div class="form-group-feedback form-group-feedback-right">
-                                <input type="text" name="judul" class="form-control form-control-outline @error('judul') is-invalid @enderror" autocomplete="off" placeholder="" value="{{$item->judul}}">
+                                <input type="text" name="judul" class="form-control form-control-outline @error('judul') is-invalid @enderror" @if($item->status != 0) style="background-color: #fff" readonly @endif autocomplete="off" value="{{$item->judul}}">
                                 <label class="label-floating">Judul</label>
                             </div>
                             @error('judul')
@@ -56,6 +56,16 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="form-group form-group-floating row">
+                        <i class="icon-calendar52 icon-m pt-2 col-lg-2"></i>
+                        <div class="col-lg-10">
+                            <div class="form-group-feedback form-group-feedback-right">
+                                <input type="date" name="tenggat" class="form-control form-control-outline" value="{{$item->tenggat}}">
+                                <label class="label-floating">Tenggat (opsional)</label>
+                            </div>
+                        </div>
+                    </div>                   
 
                     <div class="text-right">
                         <button type="submit" class="btn btn-secondary">Update <i class="icon-loop3 ml-2"></i></button>

@@ -15,6 +15,7 @@ class CreateForumTable extends Migration
     {
         Schema::create('forum', function (Blueprint $table) {
             $table->id();
+            $table->string('judul',50);
             $table->string('slug',50);
             $table->text('konten');
             $table->integer('mahasiswa_id');

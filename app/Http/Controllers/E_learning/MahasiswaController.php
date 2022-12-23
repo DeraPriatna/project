@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Repositories\E_learning\MahasiswaRepository;
 use Exception;
 use Auth;
+use Hash;
+use App\Models\Mahasiswa;
 use App\Models\Anggota;
 
 class MahasiswaController extends Controller
@@ -20,7 +22,7 @@ class MahasiswaController extends Controller
   
     public function index(Request $request)
     {
-        $items = $this->repository->paginate($request);
+        $items = Mahasiswa::select('*')->orderBy('nim')->get();
         return view('e_learning.admin.mahasiswa.index',compact('items'));
     }
     
@@ -28,7 +30,7 @@ class MahasiswaController extends Controller
     {
         $request->validate([
             'nim' => 'required|numeric|digits:9|unique:mahasiswa,nim',
-            'nm_mhs' => 'required|max:5',
+            'nm_mhs' => 'required|max:50',
             'jk' => 'required',
             'email' => 'required|email|unique:mahasiswa,email',
         ],[
@@ -91,6 +93,27 @@ class MahasiswaController extends Controller
         }
     }
 
+    public function alumni($id)
+    {
+        $status = Mahasiswa::find($id);
+        $status->update(['status' => 'Alumni']);
+        return redirect()->back();
+    }
+
+    public function nonaktif($id)
+    {
+        $status = Mahasiswa::find($id);
+        $status->update(['status' => 'NonAktif']);
+        return redirect()->back();
+    }
+
+    public function aktif($id)
+    {
+        $status = Mahasiswa::find($id);
+        $status->update(['status' => 'Aktif']);
+        return redirect()->back();
+    }
+
     public function postlogin(Request $request)
     {
         $request->validate([
@@ -115,6 +138,36 @@ class MahasiswaController extends Controller
         $mhs_id = Auth::guard('mahasiswa')->user()->id;
         $items = Anggota::all()->where('mahasiswa_id', $mhs_id);
         return view('e_learning.mahasiswa.home',compact('items'));
+    }
+
+    public function update_pass(Request $request)
+    {
+        $request->validate([
+            'opassword' => 'required|min:6',
+            'npassword' => 'required|min:6',
+            'cpassword' => 'required|same:npassword',
+        ],[
+            'opassword.required' => 'Kolom password lama wajib diisi.',
+            'opassword.min' => 'Password harus minimal :min karakter.',
+            'npassword.required' => 'Kolom password baru wajib diisi.',
+            'npassword.min' => 'Password harus minimal :min karakter.',
+            'cpassword.required' => 'Kolom konfirmasi password wajib diisi.',
+            'cpassword.same' => 'Konfirmasi password dan password baru harus sama.',
+        ]);
+
+        try {
+            $current_user = auth()->user();
+            if(Hash::check($request->opassword,$current_user->password)){
+                $current_user->update([
+                    'password' => bcrypt($request->npassword)
+                ]);
+                return redirect()->back()->with('success','Password berhasil diupdate.');
+            }else{
+                return redirect()->back()->with('error','Password lama tidak cocok.');
+            }
+        } catch (Exception $e) {
+           return response()->json(['message' => $e->getMessage()], $e->getStatus());
+        }
     }
 
     public function logout()

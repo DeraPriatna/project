@@ -15,9 +15,10 @@ class CreateDetailAbsensiTable extends Migration
     {
         Schema::create('detail_absensi', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_absensi');
-            $table->integer('id_mhs');
-            $table->string('ket',1)->nullable();
+            $table->integer('absensi_id');
+            $table->integer('kelas_id');
+            $table->integer('mahasiswa_id');
+            $table->string('ket',5)->nullable();
             $table->timestamps();
         });
     }

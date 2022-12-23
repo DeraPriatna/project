@@ -10,5 +10,67 @@
     </div>
     <!-- /control position -->
 
+    <div class="row">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body bg-primary text-white has-bg-image">
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="mb-0">{{count($mhs)}}</h3>
+                        <span class="text-uppercase font-size-xs">mahasiswa</span>
+                    </div>
+
+                    <div class="ml-3 align-self-center">
+                        <i class="icon-vcard icon-3x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body bg-indigo text-white has-bg-image">
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="mb-0">{{count($dsn)}}</h3>
+                        <span class="text-uppercase font-size-xs">dosen pengajar</span>
+                    </div>
+
+                    <div class="ml-3 align-self-center">
+                        <i class="icon-user-tie icon-3x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body bg-success text-white has-bg-image">
+                <div class="media">
+                    <div class="mr-3 align-self-center">
+                        <i class="icon-reading icon-3x opacity-75"></i>
+                    </div>
+
+                    <div class="media-body text-right">
+                        <h3 class="mb-0">{{count($kls)}}</h3>
+                        <span class="text-uppercase font-size-xs">kelas aktif</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card card-body bg-danger text-white has-bg-image">
+                <div class="media">
+                    <div class="mr-3 align-self-center">
+                        <i class="icon-archive icon-3x opacity-75"></i>
+                    </div>
+
+                    <div class="media-body text-right">
+                        <h3 class="mb-0">{{count($arsip)}}</h3>
+                        <span class="text-uppercase font-size-xs">arsip kelas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection

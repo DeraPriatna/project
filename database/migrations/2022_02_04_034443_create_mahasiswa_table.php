@@ -20,6 +20,7 @@ class CreateMahasiswaTable extends Migration
             $table->string('jk',9);
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('status',10);
             $table->timestamps();
         });
     }

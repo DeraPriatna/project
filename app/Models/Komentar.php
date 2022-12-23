@@ -11,6 +11,8 @@ class Komentar extends Model
 
     protected $table = 'komentar';
 
+    protected $guarded = ['id'];
+
     public function dosen()
     {
         return $this->belongsTo(Dosen::class);

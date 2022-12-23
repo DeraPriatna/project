@@ -27,6 +27,10 @@
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/progress_sortable.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/bars_grouped.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_charts/pages/dashboard_6/light/line_label_marks.js')}}"></script>
+
+	<script src="{{asset('global_assets/js/plugins/extensions/jquery_ui/interactions.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/demo_pages/form_select2.js')}}"></script>
 	<!-- /theme JS files -->
 
 </head>

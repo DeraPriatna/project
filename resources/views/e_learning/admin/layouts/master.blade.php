@@ -54,31 +54,10 @@
 
 	<!-- Main navbar -->
 	@include('e_learning.admin.layouts.includes._navbar')
-	<!-- /main navbar -->
-
-
-	<!-- Page header -->
-	<div class="page-header">
-		<div class="breadcrumb-line breadcrumb-line-light header-elements-lg-inline">
-			<div class="d-flex">
-				<div class="breadcrumb">
-					<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-					<span class="breadcrumb-item active">Dashboard</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="page-header-content header-elements-lg-inline">
-			<div class="page-title d-flex">
-				
-			</div>
-		</div>
-	</div>
-	<!-- /page header -->
-		
+	<!-- /main navbar -->		
 
 	<!-- Page content -->
-	<div class="page-content pt-0">
+	<div class="page-content">
 
 		<!-- Main sidebar -->
 		@include('e_learning.admin.layouts.includes._sidebar')

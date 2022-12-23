@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Repositories\E_learning\UserRepository;
 use Exception;
 use Auth;
+use Hash;
+use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\Kelas;
 
 class UserController extends Controller
 {
@@ -113,6 +117,45 @@ class UserController extends Controller
             return redirect()->route('admin.home');
         }else{
             return redirect()->route('admin.login')->with('error','Login Gagal !');
+        }
+    }
+
+    public function home()
+    {
+        $mhs = Mahasiswa::all();
+        $dsn = Dosen::all();
+        $kls = Kelas::all()->where('status',0);
+        $arsip = Kelas::all()->where('status',1);
+        return view('e_learning.admin.home',compact('mhs','dsn','kls','arsip'));
+    }
+
+    public function update_pass(Request $request)
+    {
+        $request->validate([
+            'opassword' => 'required|min:6',
+            'npassword' => 'required|min:6',
+            'cpassword' => 'required|same:npassword',
+        ],[
+            'opassword.required' => 'Kolom password lama wajib diisi.',
+            'opassword.min' => 'Password harus minimal :min karakter.',
+            'npassword.required' => 'Kolom password baru wajib diisi.',
+            'npassword.min' => 'Password harus minimal :min karakter.',
+            'cpassword.required' => 'Kolom konfirmasi password wajib diisi.',
+            'cpassword.same' => 'Konfirmasi password dan password baru harus sama.',
+        ]);
+
+        try {
+            $current_user = auth()->user();
+            if(Hash::check($request->opassword,$current_user->password)){
+                $current_user->update([
+                    'password' => bcrypt($request->npassword)
+                ]);
+                return redirect()->back()->with('success','Password berhasil diupdate.');
+            }else{
+                return redirect()->back()->with('error','Password lama tidak cocok.');
+            }
+        } catch (Exception $e) {
+           return response()->json(['message' => $e->getMessage()], $e->getStatus());
         }
     }
 

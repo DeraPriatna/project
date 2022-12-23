@@ -17,8 +17,10 @@ class CreateKelasTable extends Migration
             $table->id();
             $table->integer('matkul_id');
             $table->integer('dosen_id');
+            $table->string('hari',6);
             $table->string('waktu',11);
             $table->string('thn_akademik',9);
+            $table->string('status',1);
             $table->timestamps();
         });
     }

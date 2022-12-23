@@ -6,7 +6,7 @@
         <!-- Header -->
         <div class="sidebar-section sidebar-header">
             <div class="sidebar-section-body d-flex align-items-center justify-content-center pb-0">
-                <h6 class="sidebar-resize-hide flex-1 mb-0">Navigation</h6>
+                <h6 class="sidebar-resize-hide flex-1 mb-0">Navigasi</h6>
                 <div>
                     <button type="button" class="btn btn-outline-light text-body border-transparent btn-icon rounded-pill btn-sm sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                         <i class="icon-transmission"></i>
@@ -24,8 +24,8 @@
         <!-- User menu -->
         <div class="sidebar-section sidebar-user">
             <div class="sidebar-section-body d-flex justify-content-center">
-                <a href="#">
-                    <img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle" alt="">
+                <a href="">
+                    <img src="{{asset('global_assets/images/logo.jpeg')}}" alt="">
                 </a>
 
                 <div class="sidebar-resize-hide flex-1 ml-3">
@@ -44,9 +44,9 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
-                <li class="nav-item-header pt-0"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+                
                 <li class="nav-item">
-                    <a href="{{ route('admin.home') }}" class="nav-link active">
+                    <a href="{{ route('admin.home') }}" class="nav-link {{(request()->route()->getName()=='admin.home')?'active':''}}">
                         <i class="icon-home4"></i>
                         <span>
                             Dashboard
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.user') }}" class="nav-link">
+                    <a href="{{ route('admin.user') }}" class="nav-link ">
                         <i class="icon-users2"></i>
                         <span>
                             User
@@ -90,6 +90,14 @@
                         <i class="icon-reading"></i>
                         <span>
                             Kelas
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.arsip') }}" class="nav-link">
+                        <i class="icon-archive"></i>
+                        <span>
+                            Arsip Kelas
                         </span>
                     </a>
                 </li>

@@ -27,6 +27,7 @@
                     <th>Nama Lengkap</th>
                     <th>Jenis Kelamin</th>
                     <th>Email</th>
+                    <th>Status</th>
                     <th class="text-center">Aksi</th>
                     <th></th>
                 </tr>
@@ -40,6 +41,15 @@
                     <td>{{$item->nm_mhs}}</td>
                     <td>{{$item->jk}}</td>
                     <td>{{$item->email}}</td>
+                    <td>
+                        @if($item->status == 'Aktif') 
+                        <a href="/admin/mahasiswa/alumni/{{$item->id}}" class="badge badge-success">{{$item->status}}</a>
+                        @elseif($item->status == 'Alumni') 
+                        <a href="/admin/mahasiswa/nonaktif/{{$item->id}}" class="badge badge-secondary">{{$item->status}}</a>
+                        @else 
+                        <a href="/admin/mahasiswa/aktif/{{$item->id}}" class="badge badge-danger">{{$item->status}}</a>
+                        @endif
+                    </td>
                     <td class="text-center">
                         <div class="list-icons">
                             <div class="dropdown">

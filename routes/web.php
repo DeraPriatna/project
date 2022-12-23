@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// e-learning
 use App\Http\Controllers\E_learning\UserController;
 use App\Http\Controllers\E_learning\DosenController;
 use App\Http\Controllers\E_learning\MahasiswaController;
@@ -12,19 +11,21 @@ use App\Http\Controllers\E_learning\ForumController;
 use App\Http\Controllers\E_learning\AbsensiController;
 use App\Http\Controllers\E_learning\MateriController;
 use App\Http\Controllers\E_learning\TugasController;
+use App\Http\Controllers\E_learning\NilaiController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// e-learning
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['guest:web'])->group(function(){
         Route::view('/login','e_learning.admin.auths.login')->name('login');
         Route::post('/postlogin',[UserController::class,'postlogin'])->name('postlogin');
     });
     Route::middleware(['auth:web'])->group(function(){
-        Route::view('/home','e_learning.admin.home')->name('home');
+        Route::get('/home',[UserController::class,'home'])->name('home');
+        Route::view('/password/edit','e_learning.admin.users.edit_pass')->name('password.edit');
+        Route::post('/password/update',[UserController::class,'update_pass'])->name('password.update');
         Route::get('/logout',[UserController::class,'logout'])->name('logout');
         
         Route::get('/user',[UserController::class,'index'])->name('user');
@@ -40,6 +41,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/mahasiswa/edit/{id}',[MahasiswaController::class,'edit'])->name('mahasiswa.edit');
         Route::post('/mahasiswa/update/{id}',[MahasiswaController::class,'update'])->name('mahasiswa.update');
         Route::get('/mahasiswa/delete/{id}',[MahasiswaController::class,'delete'])->name('mahasiswa.delete');
+        Route::get('/mahasiswa/alumni/{id}',[MahasiswaController::class,'alumni'])->name('mahasiswa.alumni');
+        Route::get('/mahasiswa/nonaktif/{id}',[MahasiswaController::class,'nonaktif'])->name('mahasiswa.nonaktif');
+        Route::get('/mahasiswa/aktif/{id}',[MahasiswaController::class,'aktif'])->name('mahasiswa.aktif');
 
         Route::get('/dosen',[DosenController::class,'index'])->name('dosen');
         Route::view('/dosen/create','e_learning.admin.dosen.create')->name('dosen.create');
@@ -64,6 +68,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/kelas/member/{id}',[KelasController::class,'member'])->name('kelas.member');
         Route::post('/kelas/member/add/{id}',[KelasController::class,'add'])->name('kelas.member.add');
         Route::get('/kelas/member/remove/{id}',[KelasController::class,'remove'])->name('kelas.member.remove');
+        Route::get('/kelas/arsip/{id}',[KelasController::class,'arsip'])->name('kelas.arsip');
+        Route::get('/kelas/arsip/{id}/cancel',[KelasController::class,'cancel_arsip'])->name('kelas.arsip.cancel');
+
+        Route::get('/arsip',[KelasController::class,'arsip_kelas'])->name('arsip');
     });
 });
 
@@ -74,27 +82,43 @@ Route::prefix('dosen')->name('dosen.')->group(function(){
     });
     Route::middleware(['auth:dosen'])->group(function(){
         Route::get('/home',[DosenController::class,'home'])->name('home');
+        Route::view('password/edit','e_learning.dosen.edit_pass')->name('password.edit');
+        Route::post('password/update',[DosenController::class,'update_pass'])->name('password.update');
         Route::get('/logout',[DosenController::class,'logout'])->name('logout');
         
-        Route::get('/{id}/forum',[ForumController::class,'index'])->name('forum');
+        Route::get('{route}/{id}/forum',[ForumController::class,'index'])->name('forum');
+        Route::post('{id}/forum/store',[ForumController::class,'store'])->name('forum.store');
+        Route::get('{route}/{id}/forum/{forum}/view',[ForumController::class,'view'])->name('forum.view');
+        Route::post('{route}/{id}/forum/{forum}/view',[ForumController::class,'komentar'])->name('forum.komentar');
 
-        Route::get('/{id}/absensi',[AbsensiController::class,'index'])->name('absensi');
+        Route::get('{route}/{id}/absensi',[AbsensiController::class,'index'])->name('absensi');
+        Route::post('/{id}/absensi/store',[AbsensiController::class,'store'])->name('absensi.store');
+        Route::post('/{id}/absensi/update',[AbsensiController::class,'update'])->name('absensi.update');
         
-        Route::get('/{id}/materi',[MateriController::class,'index'])->name('materi');
-        Route::get('/{id}/materi/create',[MateriController::class,'create'])->name('materi.create');
+        Route::get('{route}/{id}/materi',[MateriController::class,'index'])->name('materi');
+        Route::get('{route}/{id}/materi/create',[MateriController::class,'create'])->name('materi.create');
         Route::post('/{id}/materi/store',[MateriController::class,'store'])->name('materi.store');
-        Route::get('/{id}/materi/edit/{id2}',[MateriController::class,'edit'])->name('materi.edit');
+        Route::get('{route}/{id}/materi/edit/{id2}',[MateriController::class,'edit'])->name('materi.edit');
         Route::post('/{id}/materi/update/{id2}',[MateriController::class,'update'])->name('materi.update');
         Route::get('/materi/delete/{id2}',[MateriController::class,'delete'])->name('materi.delete');
 
-        Route::get('/{id}/tugas',[TugasController::class,'index'])->name('tugas');
-        Route::get('/{id}/tugas/create',[TugasController::class,'create'])->name('tugas.create');
+        Route::get('{route}/{id}/tugas',[TugasController::class,'index'])->name('tugas');
+        Route::get('{route}/{id}/tugas/create',[TugasController::class,'create'])->name('tugas.create');
         Route::post('/{id}/tugas/store',[TugasController::class,'store'])->name('tugas.store');
-        Route::get('/{id}/tugas/edit/{id2}',[TugasController::class,'edit'])->name('tugas.edit');
+        Route::get('{route}/{id}/uts/create',[TugasController::class,'create_uts'])->name('uts.create');
+        Route::post('/{id}/uts/store',[TugasController::class,'store_uts'])->name('uts.store');
+        Route::get('{route}/{id}/uas/create',[TugasController::class,'create_uas'])->name('uas.create');
+        Route::post('/{id}/uas/store',[TugasController::class,'store_uas'])->name('uas.store');
+        Route::get('{route}/{id}/tugas/edit/{id2}',[TugasController::class,'edit'])->name('tugas.edit');
         Route::post('/{id}/tugas/update/{id2}',[TugasController::class,'update'])->name('tugas.update');
         Route::get('/tugas/delete/{id2}',[TugasController::class,'delete'])->name('tugas.delete');
+        Route::get('{route}/{id}/tugas/{tugas}/view',[TugasController::class,'view'])->name('tugas.view');
+        Route::get('{route}/{id}/tugas/{tugas}/view/{d_tugas}',[TugasController::class,'view_tugas'])->name('tugas.view_tugas');
+        Route::post('/{id}/tugas/{tugas}/view/{d_tugas}/nilai',[TugasController::class,'nilai'])->name('tugas.nilai');
 
-        Route::get('/download/{file}',[MateriController::class,'download'])->name('download');
+        Route::get('{route}/{kelas}/nilai',[NilaiController::class,'index'])->name('nilai');
+        Route::get('{route}/{kelas}/nilai/create',[NilaiController::class,'create'])->name('create');
+        Route::post('/{kelas}/nilai/store',[NilaiController::class,'store'])->name('store');
     });
 });
 
@@ -105,10 +129,30 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
     });
     Route::middleware(['auth:mahasiswa'])->group(function(){
         Route::get('/home',[MahasiswaController::class,'home'])->name('home');
+        Route::view('password/edit','e_learning.mahasiswa.edit_pass')->name('password.edit');
+        Route::post('password/update',[MahasiswaController::class,'update_pass'])->name('password.update');
         Route::get('/logout',[MahasiswaController::class,'logout'])->name('logout');
+
+        Route::get('{route}/{id}/forum',[ForumController::class,'index_mhs'])->name('forum');
+        Route::post('/{id}/forum/store',[ForumController::class,'store_mhs'])->name('forum.store');
+        Route::get('{route}/{id}/forum/{forum}/view',[ForumController::class,'view_mhs'])->name('forum.view');
+        Route::post('{route}/{id}/forum/{forum}/view',[ForumController::class,'komentar_mhs'])->name('forum.komentar');
+
+        Route::get('{route}/{id}/absensi',[AbsensiController::class,'index_mhs'])->name('absensi');
+        Route::post('/{id}/absensi/{id2}/store',[AbsensiController::class,'store_mhs'])->name('absensi.store');
+
+        Route::get('{route}/{id}/materi',[MateriController::class,'index_mhs'])->name('materi');
+
+        Route::get('{route}/{id}/tugas',[TugasController::class,'index_mhs'])->name('tugas');
+        Route::get('{route}/{id}/tugas/{tugas}/view',[TugasController::class,'view_mhs'])->name('tugas.view');
+        Route::post('/{id}/tugas/{tugas}/store',[TugasController::class,'store_mhs'])->name('tugas.store');
+
+        Route::get('{route}/{kelas}/nilai',[NilaiController::class,'index_mhs'])->name('nilai');
     });
 });
 
+// E-LearningDNBS
+// xRptA5vxGzcPwTX#vNp2
 
 
 

@@ -27,19 +27,31 @@
                     <th>Semester</th>
                     <th>Dosen Pengajar</th>
                     <th>Tahun Akademik</th>
+                    <th>Jumlah Pertemuan</th>
                     <th class="text-center">Aksi</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no=1; ?>
-                @foreach($items as $item)
+                @foreach($items->where('status',0) as $item)
                 <tr>
                     <td class="text-center">{{$no++}}</td>
                     <td><a href="/admin/kelas/member/{{$item->id}}" style="color: #333" data-popup="tooltip" title="" data-placement="top" data-original-title="Klik untuk detail kelas">{{$item->matkul->matkul}}</a></td>
                     <td class="text-center">{{$item->matkul->semester}}</td>
                     <td>{{$item->dosen->nm_dsn}}</td>
                     <td>{{$item->thn_akademik}}</td>
+                    <td>
+                        <?php $jml = 0 ?>
+                        @foreach($absensi->where('kelas_id',$item->id) as $abs)
+                            <?php $jml++ ?>
+                        @endforeach
+                        @if($jml == 16)
+                            <span class="badge badge-success">{{$jml}}</span>
+                        @else
+                            {{$jml}}
+                        @endif
+                    </td>
                     <td class="text-center">
                         <div class="list-icons">
                             <div class="dropdown">
@@ -48,9 +60,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="/admin/kelas/member/{{$item->id}}" class="dropdown-item"><i class="icon-user-plus"></i> Anggota</a>
                                     <a href="/admin/kelas/edit/{{$item->id}}" class="dropdown-item"><i class="icon-pencil7"></i> Edit</a>
                                     <a href="/admin/kelas/delete/{{$item->id}}" class="dropdown-item" onclick="return confirm('Kelas akan dihapus?')"><i class="icon-bin"></i> Hapus</a>
-                                    <a href="/admin/kelas/member/{{$item->id}}" class="dropdown-item"><i class="icon-user-plus"></i> Anggota</a>
+                                    <a href="/admin/kelas/arsip/{{$item->id}}" class="dropdown-item" onclick="return confirm('Arsipkan kelas?')"><i class="icon-archive"></i> Arsipkan</a>
                                 </div>
                             </div>
                         </div>

@@ -45,6 +45,23 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-form-label col-lg-3">Hari</label>
+                        <div class="col-lg-9">
+                            <select data-placeholder="Pilih Hari..." class="form-control select-search" name="hari" data-fouc>
+                                <option></option>
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                            </select>
+                            @error('hari')
+                                <label id="with_icon-error" class="validation-invalid-label" for="with_icon">{{$message}}</label>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-form-label col-lg-3">Waktu</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="waktu" data-mask="19.59-19.59" autocomplete="off" value="{{old('waktu')}}">

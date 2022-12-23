@@ -10,6 +10,8 @@ use App\Models\Matkul;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Anggota;
+use App\Models\Kelas;
+use App\Models\Absensi;
 
 class KelasController extends Controller
 {
@@ -23,7 +25,8 @@ class KelasController extends Controller
     public function index(Request $request)
     {
         $items = $this->repository->paginate($request);
-        return view('e_learning.admin.kelas.index',compact('items'));
+        $absensi = Absensi::all();
+        return view('e_learning.admin.kelas.index',compact('items','absensi'));
     }
 
     public function create()
@@ -38,11 +41,13 @@ class KelasController extends Controller
         $request->validate([
             'matkul_id' => 'required',
             'dosen_id' => 'required',
+            'hari' => 'required',
             'waktu' => 'required|min:11',
             'thn_akademik' => 'required|min:9',
         ],[
             'matkul_id.required' => 'Silahkan pilih mata kuliah.',
             'dosen_id.required' => 'Silahkan pilih dosen pengajar.',
+            'hari.required' => 'Kolom hari wajib diisi.',
             'waktu.required' => 'Kolom waktu wajib diisi.',
             'waktu.min' => 'Waktu harus :min karakter.',
             'thn_akademik.required' => 'Kolom tahun akademik wajib diisi.',
@@ -98,7 +103,7 @@ class KelasController extends Controller
     public function member($id)
     {
         $item = $this->repository->show($id);
-        $mhs = Mahasiswa::all();
+        $mhs = Mahasiswa::select('*')->where('status','Aktif')->orderBy('nim')->get();
         $member = Anggota::all()->where('kelas_id', $id); 
         return view('e_learning.admin.kelas.member',compact('item','mhs','member'));
     }
@@ -125,5 +130,26 @@ class KelasController extends Controller
         $member = Anggota::find($id);
         $member->delete();
         return redirect()->back()->with('remove','Anggota telah dihapus.');
+    }
+
+    public function arsip($id)
+    {
+        $arsip = Kelas::find($id);
+        $arsip->update(['status' => 1]);
+        return redirect()->back()->with('success','Kelas telah diarsipkan.');
+    }
+
+    public function arsip_kelas()
+    {
+        $items = Kelas::all();
+        $absensi = Absensi::all(); 
+        return view('e_learning.admin.kelas.arsip',compact('items','absensi'));
+    }
+
+    public function cancel_arsip($id)
+    {
+        $arsip = Kelas::find($id);
+        $arsip->update(['status' => 0]);
+        return redirect()->back()->with('success','Arsip kelas telah dibatalkan.');
     }
 }
