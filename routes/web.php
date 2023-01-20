@@ -115,6 +115,7 @@ Route::prefix('dosen')->name('dosen.')->group(function(){
         Route::get('{route}/{id}/tugas/{tugas}/view',[TugasController::class,'view'])->name('tugas.view');
         Route::get('{route}/{id}/tugas/{tugas}/view/{d_tugas}',[TugasController::class,'view_tugas'])->name('tugas.view_tugas');
         Route::post('/{id}/tugas/{tugas}/view/{d_tugas}/nilai',[TugasController::class,'nilai'])->name('tugas.nilai');
+        Route::get('{route}/{id}/tugas/{tugas}/view/{d_tugas}/edit',[TugasController::class,'edit_nilai'])->name('tugas.edit_nilai');
 
         Route::get('{route}/{kelas}/nilai',[NilaiController::class,'index'])->name('nilai');
         Route::get('{route}/{kelas}/nilai/create',[NilaiController::class,'create'])->name('create');

@@ -1,10 +1,8 @@
 @extends('e_learning.dosen.layouts.master')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-1"></div>
-    
-    <div class="col-lg-10 pt-1">
+<div class="row">    
+    <div class="col-lg-12 pt-1">
         @if(Session::has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
@@ -45,11 +43,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><a href="/dosen/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$item->id}}" data-popup="tooltip" title="" data-placement="top" data-original-title="Lihat Tugas">{{$item->file}}</a></td>
+                            <td><a href="/dosen/t/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$item->id}}" data-popup="tooltip" title="" data-placement="top" data-original-title="Lihat Tugas">{{$item->file}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>@if($item->nilai == 0) <span class="font-size-sm text-muted">Belum dinilai</span> @else {{$item->nilai}} @endif</td>
                             <td class="text-center">
-                                <a href="/dosen/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$item->id}}" class="icon-file-eye" data-popup="tooltip" title="" data-placement="top" data-original-title="Lihat Tugas"></a>
+                                <a href="/dosen/t/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$item->id}}" class="icon-file-eye" data-popup="tooltip" title="" data-placement="top" data-original-title="Lihat Tugas"></a>
+                                @if($item->nilai != 0)
+                                    <a href="/dosen/t/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$item->id}}/edit" class="icon-pencil6" data-popup="tooltip" title="" data-placement="top" data-original-title="Edit Nilai"></a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

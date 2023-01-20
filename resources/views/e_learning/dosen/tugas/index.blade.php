@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-1"></div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-10">
         @if(Session::has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
@@ -37,8 +37,16 @@
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-file-plus mr-2"></i> Buat</button>
                 <div class="dropdown-menu dropdown-menu-right" style="">
                     <a href="/dosen/t/{{$kelas->id}}/tugas/create" class="dropdown-item"><i class="icon-clipboard6"></i> Tugas</a>
-                    <a href="/dosen/t/{{$kelas->id}}/uts/create" class="dropdown-item"><i class="icon-clipboard6"></i> UTS</a>
-                    <a href="/dosen/t/{{$kelas->id}}/uas/create" class="dropdown-item"><i class="icon-clipboard6"></i> UAS</a>
+                    <?php $uts = 0 ?>
+                    @foreach($items->where('status','1') as $item)
+                        <?php $uts = $uts + 1 ?>
+                    @endforeach
+                    <a href="/dosen/t/{{$kelas->id}}/uts/create" class="dropdown-item @if($uts == 1) disabled @endif"><i class="icon-clipboard6"></i> UTS</a>
+                    <?php $uas = 0 ?>
+                    @foreach($items->where('status','2') as $item)
+                        <?php $uas = $uas + 1 ?>
+                    @endforeach
+                    <a href="/dosen/t/{{$kelas->id}}/uas/create" class="dropdown-item @if($uas == 1 || $uts == 0) disabled @endif"><i class="icon-clipboard6"></i> UAS</a>
                 </div>
             </div>
             <div class="d-inline-flex align-items-center ml-auto">
@@ -50,9 +58,9 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-1"></div>
     
-    <div class="col-lg-8 pt-3">
+    <div class="col-lg-10 pt-3">
         <div class="accordion-sortable" id="accordion-controls">
             @foreach($items as $item)
             <div class="card">
@@ -70,8 +78,8 @@
                                 <a href="#" class="list-icons-item" data-toggle="dropdown"><i class="icon-more2"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="/dosen/t/{{$kelas->id}}/tugas/edit/{{$item->id}}" class="dropdown-item"><i class="icon-pencil3"></i> Edit</a>
-                                    <a href="/dosen/tugas/delete/{{$item->id}}" class="dropdown-item" onclick="return confirm('Hapus tugas?')"><i class="icon-trash-alt"></i> Hapus</a>
                                     <a href="/dosen/t/{{$kelas->id}}/tugas/{{$item->id}}/view" class="dropdown-item"><i class="icon-file-check"></i> Tugas Diserahkan</a>
+                                    <a href="/dosen/tugas/delete/{{$item->id}}" class="dropdown-item" onclick="return confirm('Hapus tugas?')"><i class="icon-trash-alt"></i> Hapus</a>
                                 </div>
                             </div>
                         </div>
@@ -80,8 +88,11 @@
 
                 <div id="accordion-controls-group{{$item->id}}" class="collapse" data-parent="#accordion-controls" style="">
                     <div class="card-body">
-                        <span class="font-size-sm">Tenggat : {{$item->tenggat}}</span><br>
-                        {{$item->petunjuk}}
+                        <span class="font-size-sm text-danger">Tenggat: {{$item->tenggat}} </span><br>
+                        @if($item->petunjuk != null)
+                            {{$item->petunjuk}} <br>
+                        @endif
+                        <br>
                         <iframe width="100%" height="460" src="/storage/tugas/{{$item->file}}" frameborder="1"></iframe>
                     </div>
                 </div>

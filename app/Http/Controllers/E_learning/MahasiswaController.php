@@ -22,7 +22,7 @@ class MahasiswaController extends Controller
   
     public function index(Request $request)
     {
-        $items = Mahasiswa::select('*')->orderBy('nim')->get();
+        $items = Mahasiswa::select('*')->orderBy('nim','desc')->get();
         return view('e_learning.admin.mahasiswa.index',compact('items'));
     }
     

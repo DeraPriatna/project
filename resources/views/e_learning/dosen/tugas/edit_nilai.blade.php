@@ -12,13 +12,13 @@
                 <div class="media-body">
                     <h6 class="media-title font-weight-semibold">{{$d_tugas->mahasiswa->nm_mhs}}, <span class="font-size-sm">{{$d_tugas->mahasiswa->nim}}</span></h6>
                     <p>Diserahkan {{$d_tugas->created_at}}</p>
-                    @if($d_tugas->nilai == 0)
+                    
                     <form action="/dosen/{{$kelas->id}}/tugas/{{$tugas->id}}/view/{{$d_tugas->id}}/nilai" method="POST">
                         @csrf
                         <div class="form-group form-group-floating row">
                             <div class="col-lg-10">
                                 <div class="form-group-feedback form-group-feedback-right">
-                                    <input type="text" name="nilai" class="form-control form-control-outline @error('nilai') is-invalid @enderror" autofocus value="100">
+                                    <input type="text" name="nilai" class="form-control form-control-outline @error('nilai') is-invalid @enderror" autofocus value="{{$d_tugas->nilai}}">
                                     <label class="label-floating">Nilai /100</label>
                                 </div>
                                 @error('nilai')
@@ -27,20 +27,9 @@
                             </div>
                         </div> 
                         
-                        <button type="submit" class="btn btn-secondary btn-sm">Simpan Nilai <i class="icon-clippy ml-1"></i></button>
+                        <button type="submit" class="btn btn-secondary btn-sm">Update Nilai <i class="icon-clippy ml-1"></i></button>
                     </form>
-                    @else
-                    <div class="form-group form-group-floating row">
-                        <div class="col-lg-10">
-                            <div class="form-group-feedback form-group-feedback-right">
-                                <input disabled class="form-control form-control-outline" style="background-color: #fff" value="{{$d_tugas->nilai}}">
-                                <label class="label-floating">Nilai /100</label>
-                            </div>
-                        </div>
-                    </div> 
                     
-                    <button disabled class="btn btn-light">Tugas Dinilai <i class="icon-clippy ml-1"></i></button>
-                    @endif
                 </div>
             </div>
         </div>

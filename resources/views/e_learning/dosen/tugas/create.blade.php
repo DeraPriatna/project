@@ -54,8 +54,11 @@
                         <div class="col-lg-10">
                             <div class="form-group-feedback form-group-feedback-right">
                                 <input type="date" name="tenggat" class="form-control form-control-outline" value="{{old('tenggat')}}">
-                                <label class="label-floating">Tenggat (opsional)</label>
+                                <label class="label-floating">Tenggat</label>
                             </div>
+                            @error('tenggat')
+                                <label id="with_icon-error" class="validation-invalid-label" for="with_icon">{{$message}}</label>
+                            @enderror
                         </div>
                     </div>
 

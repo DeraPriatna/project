@@ -46,7 +46,9 @@
 
                 <div id="accordion-controls-group{{$item->id}}" class="collapse" data-parent="#accordion-controls" style="">
                     <div class="card-body">
-                        {{$item->deskripsi}}
+                        @if($item->deskripsi != null)
+                            {{$item->deskripsi}} <br><br>
+                        @endif
                         <iframe width="100%" height="460" src="/storage/materi/{{$item->file}}" frameborder="1"></iframe>
                     </div>
                 </div>

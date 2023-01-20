@@ -62,8 +62,8 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="/admin/kelas/member/{{$item->id}}" class="dropdown-item"><i class="icon-user-plus"></i> Anggota</a>
                                     <a href="/admin/kelas/edit/{{$item->id}}" class="dropdown-item"><i class="icon-pencil7"></i> Edit</a>
-                                    <a href="/admin/kelas/delete/{{$item->id}}" class="dropdown-item" onclick="return confirm('Kelas akan dihapus?')"><i class="icon-bin"></i> Hapus</a>
                                     <a href="/admin/kelas/arsip/{{$item->id}}" class="dropdown-item" onclick="return confirm('Arsipkan kelas?')"><i class="icon-archive"></i> Arsipkan</a>
+                                    <a href="/admin/kelas/delete/{{$item->id}}" class="dropdown-item" onclick="return confirm('Kelas akan dihapus?')"><i class="icon-bin"></i> Hapus</a>
                                 </div>
                             </div>
                         </div>

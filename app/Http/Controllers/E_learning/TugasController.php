@@ -46,6 +46,12 @@ class TugasController extends Controller
         return view('e_learning.dosen.tugas.view_tugas',compact('route','kelas','tugas','d_tugas'));
     }
 
+    public function edit_nilai($route, $id, Tugas $tugas, DetailTugas $d_tugas)
+    {
+        $kelas = Kelas::find($id);
+        return view('e_learning.dosen.tugas.edit_nilai',compact('route','kelas','tugas','d_tugas'));
+    }
+
     public function view_mhs($route, $id, Tugas $tugas)
     {
         $kelas = Kelas::find($id);
@@ -70,11 +76,13 @@ class TugasController extends Controller
         $request->validate([
             'judul' => 'required|max:50',
             'file'  => 'required|mimes:pdf',
+            'tenggat'  => 'required',
         ],[
             'judul.required' => 'Kolom judul wajib diisi.',
             'judul.max' => 'Judul tidak boleh lebih dari :max karakter.',
             'file.required' => 'Silahkan pilih file untuk diupload.',
             'file.mimes' => 'File harus berupa file dengan tipe pdf.',
+            'tenggat.required' => 'Kolom tenggat wajib diisi.',
             'file.uploaded' => 'File gagal diunggah.',
         ]);
 
@@ -91,6 +99,7 @@ class TugasController extends Controller
             $item->judul = ucwords($request->input('judul'));
             $item->petunjuk = ucfirst($request->input('petunjuk'));
             $item->file = $filenameSave;
+            $item->tenggat = $request->tenggat;
             $item->kelas_id = $id;
             $item->save();
             return redirect('/dosen/t/'.$id.'/tugas')->with('success','Tugas telah diposting.');
@@ -103,9 +112,11 @@ class TugasController extends Controller
     {
         $request->validate([
             'file'  => 'required|mimes:pdf',
+            'tenggat'  => 'required',
         ],[
             'file.required' => 'Silahkan pilih file untuk diupload.',
             'file.mimes' => 'File harus berupa file dengan tipe pdf.',
+            'tenggat.required' => 'Kolom tenggat wajib diisi.',
             'file.uploaded' => 'File gagal diunggah.',
         ]);
 
@@ -122,6 +133,7 @@ class TugasController extends Controller
             $item->judul = $request->input('judul');
             $item->petunjuk = ucfirst($request->input('petunjuk'));
             $item->file = $filenameSave;
+            $item->tenggat = $request->tenggat;
             $item->kelas_id = $id;
             $item->status = 1;
             $item->save();
@@ -135,9 +147,11 @@ class TugasController extends Controller
     {
         $request->validate([
             'file'  => 'required|mimes:pdf',
+            'tenggat'  => 'required',
         ],[
             'file.required' => 'Silahkan pilih file untuk diupload.',
             'file.mimes' => 'File harus berupa file dengan tipe pdf.',
+            'tenggat.required' => 'Kolom tenggat wajib diisi.',
             'file.uploaded' => 'File gagal diunggah.',
         ]);
 
@@ -154,6 +168,7 @@ class TugasController extends Controller
             $item->judul = $request->input('judul');
             $item->petunjuk = ucfirst($request->input('petunjuk'));
             $item->file = $filenameSave;
+            $item->tenggat = $request->tenggat;
             $item->kelas_id = $id;
             $item->status = 2;
             $item->save();
@@ -238,11 +253,12 @@ class TugasController extends Controller
     public function nilai($id, Tugas $tugas, DetailTugas $d_tugas, Request $request)
     {
         $request->validate([
-            'nilai' => 'required|numeric|max:100',
+            'nilai' => 'required|numeric|max:100|min:0',
         ],[
             'nilai.required' => 'Kolom nilai wajib diisi.',
             'nilai.numeric' => 'Nilai harus berupa angka.',
             'nilai.max' => 'Nilai tidak boleh lebih besar dari 100.',
+            'nilai.min' => 'Nilai tidak boleh lebih kecil dari 0.',
         ]);
 
         try {

@@ -16,7 +16,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-0">{{count($mhs)}}</h3>
-                        <span class="text-uppercase font-size-xs">mahasiswa</span>
+                        <span class="text-uppercase font-size-xs">mahasiswa aktif</span>
                     </div>
 
                     <div class="ml-3 align-self-center">
@@ -70,6 +70,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="alert alert-secondary border-0 alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+        <span class="font-weight-semibold">Catatan!</span> Dosen dan mahasiswa dapat melakukan login dengan memasukan NIDN atau NIM sebagai password kemudian menggantinya setalah login.
     </div>
 
 </div>

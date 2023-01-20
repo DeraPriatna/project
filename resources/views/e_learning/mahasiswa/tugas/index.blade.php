@@ -38,7 +38,7 @@
 
                     <div class="header-elements">
                         <div class="list-icons">
-                            <span class="font-size-sm text-muted">@if($item->tenggat == null) Tidak ada batas waktu @else Tenggat: {{$item->tenggat}} @endif</span>
+                            <span class="font-size-sm text-muted">Diposting {{$item->created_at}}</span>
                             <a class="list-icons-item" data-action="fullscreen"></a>
                             <a href="/mahasiswa/t/{{$kelas->id}}/tugas/{{$item->id}}/view" class="icon-file-upload" data-popup="tooltip" title="" data-placement="top" data-original-title="Serahkan Tugas"></a>
                         </div>
@@ -47,7 +47,12 @@
 
                 <div id="accordion-controls-group{{$item->id}}" class="collapse" data-parent="#accordion-controls" style="">
                     <div class="card-body">
-                        {{$item->petunjuk}}
+                        @if($item->tenggat != null)
+                            <span class="font-size-sm text-danger">Tenggat: {{$item->tenggat}} </span><br>
+                        @endif
+                        @if($item->petunjuk != null)
+                            {{$item->petunjuk}} <br><br>
+                        @endif
                         <iframe width="100%" height="460" src="/storage/tugas/{{$item->file}}" frameborder="1"></iframe>
                     </div>
                 </div>

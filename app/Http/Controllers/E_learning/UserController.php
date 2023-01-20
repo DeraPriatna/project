@@ -122,7 +122,7 @@ class UserController extends Controller
 
     public function home()
     {
-        $mhs = Mahasiswa::all();
+        $mhs = Mahasiswa::all()->where('status','Aktif');
         $dsn = Dosen::all();
         $kls = Kelas::all()->where('status',0);
         $arsip = Kelas::all()->where('status',1);

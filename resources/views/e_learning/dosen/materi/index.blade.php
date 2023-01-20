@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-1"></div>
 
-    <div class="col-lg-8">     
+    <div class="col-lg-10">     
         @if(Session::has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
@@ -45,9 +45,9 @@
 </div>
     
 <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-1"></div>
 
-    <div class="col-lg-8 pt-3">
+    <div class="col-lg-10 pt-3">
         <div class="accordion-sortable" id="accordion-controls">
             @foreach($items as $item)
             <div class="card">
@@ -74,7 +74,9 @@
 
                 <div id="accordion-controls-group{{$item->id}}" class="collapse" data-parent="#accordion-controls" style="">
                     <div class="card-body">
-                        {{$item->deskripsi}}
+                        @if($item->deskripsi != null)
+                            {{$item->deskripsi}} <br><br>
+                        @endif
                         <iframe width="100%" height="460" src="/storage/materi/{{$item->file}}" frameborder="1"></iframe>
                     </div>
                 </div>

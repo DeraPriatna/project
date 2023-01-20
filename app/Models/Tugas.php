@@ -24,7 +24,7 @@ class Tugas extends Model
     public function getTenggatAttribute()
     {
         return Carbon::parse($this->attributes['tenggat'])
-            ->translatedFormat('l, d F y');
+            ->translatedFormat('l, d F Y');
     }
 
     public function kelas()

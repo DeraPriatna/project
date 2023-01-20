@@ -17,7 +17,7 @@ class NilaiController extends Controller
     public function index($route, Kelas $kelas)
     {
         $format_nilai = FormatNilai::all()->where('kelas_id',$kelas->id);
-        $anggota = Anggota::all()->where('kelas_id',$kelas->id);
+        $anggota = Anggota::select('*')->where('kelas_id',$kelas->id)->orderBy('mahasiswa_id')->get();
         $absensi = Absensi::all()->where('kelas_id',$kelas->id);
         $d_absensi = DetailAbsensi::all()->where('ket','!=','x');
         $tugas = Tugas::all()->where('kelas_id',$kelas->id);

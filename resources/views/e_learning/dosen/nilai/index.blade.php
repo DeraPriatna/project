@@ -99,26 +99,28 @@
                         @foreach($anggota as $agt)
                         <tr class="text-center">
                            <td>{{$no++}}</td>
-                           <td>{{$agt->mahasiswa->nm_mhs}}</td>
+                           <td class="text-left">{{$agt->mahasiswa->nm_mhs}} <div class="text-muted font-size-sm">{{$agt->mahasiswa->nim}}</div></td>
                            <td>
-                                <?php $jml_abs = 0 ?>
+                                <?php $jml_abs = 0; $jml_hadir = 0; $nilai_abs = 0 ?>
                                 @foreach($absensi as $abs)
-                                    <?php $jml_hadir = 0; $jml_abs = $jml_abs + 1 ?>
+                                    <?php  $jml_abs = $jml_abs + 1 ?>
                                     @foreach($d_absensi->where('absensi_id',$abs->id)->where('mahasiswa_id',$agt->mahasiswa->id) as $absen)
                                         <?php $jml_hadir = $jml_hadir + 1 ?>
                                     @endforeach
-                                    {{$nilai_abs = ($jml_hadir * 100) / $jml_abs}}
+                                    <?php $nilai_abs = ($jml_hadir * 100) / $jml_abs ?>
                                 @endforeach
+                                {{number_format($nilai_abs)}}
                             </td>
                             <td>
-                                <?php $jml_tgs = 0 ?>
+                                <?php $jml_tgs = 0; $nilai = 0 ?>
                                 @foreach($tugas->where('status','0') as $tgs)
-                                    <?php $jml_tgs = $jml_tgs + 1; $nilai = 0 ?>
+                                    <?php $jml_tgs = $jml_tgs + 1 ?>
                                     @foreach($d_tugas->where('tugas_id',$tgs->id)->where('mahasiswa_id',$agt->mahasiswa->id) as $tgs)
                                         <?php $nilai = $nilai + $tgs->nilai ?>
                                     @endforeach
-                                    {{$nilai_tgs = $nilai / $jml_tgs}}
+                                    <?php $nilai_tgs = $nilai / $jml_tgs ?>
                                 @endforeach
+                                {{number_format($nilai_tgs)}}
                             </td>
                             <td>
                                 <?php $nilai_uts = 0 ?>
@@ -139,12 +141,14 @@
                                 {{$nilai_uas}}
                             </td>
                             <td>
+                                <?php $nilai_akhir = 0 ?>
                                 @foreach($format_nilai as $nilai)
-                                    {{ (($nilai_abs * $nilai->nilai_absen) / 100) +
+                                    <?php $nilai_akhir = (($nilai_abs * $nilai->nilai_absen) / 100) +
                                         (($nilai_tgs * $nilai->nilai_tugas) / 100) +
                                         (($nilai_uts * $nilai->nilai_uts) / 100) +
-                                        (($nilai_uas * $nilai->nilai_uas) / 100) }}
+                                        (($nilai_uas * $nilai->nilai_uas) / 100) ?>
                                 @endforeach
+                                {{ number_format($nilai_akhir) }}
                             </td>
                         </tr>
                         @endforeach

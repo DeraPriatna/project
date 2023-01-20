@@ -18,7 +18,7 @@ class AbsensiController extends Controller
         $kelas = Kelas::find($id);
         $absensi = Absensi::all()->where('kelas_id', $id);
         $d_absensi = DetailAbsensi::all();
-        $anggota = Anggota::all()->where('kelas_id', $id); 
+        $anggota = Anggota::select('*')->where('kelas_id', $id)->orderBy('mahasiswa_id')->get(); 
         return view('e_learning.dosen.absensi.index',compact('route','kelas','absensi','d_absensi','anggota'));
     }
 
